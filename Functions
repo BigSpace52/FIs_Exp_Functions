@@ -1,0 +1,68 @@
+def erro_aleat(n):
+    soma = counter = 0
+    dados = []
+    
+    while counter < n:
+        dado = float(input(f'Medida{counter}:'))
+        dados.append(dado)
+        soma += dado
+        counter += 1
+    
+    média = soma/n
+    counter = 0
+    desvios = []
+    
+    while counter < n:
+        desvio = dados[counter] - média
+        desvios.append(desvio)
+        counter += 1
+        
+    soma2 = 0
+    counter = 0
+    desvios2 = []
+    
+    while counter < n:
+        desvio2 = desvios[counter]**2
+        desvios2.append(desvio2)
+        soma2 += desvio2
+        counter += 1
+        
+    N = n*(n-1)
+    counter = 0
+    variância = (soma2)/(N)
+    desvio_padrão = variância**(1/2)
+    
+    print(f'A média é: {média}')
+    print(f'O erro aleatório é: {desvio_padrão}')
+    
+    
+def prop_erros():
+    
+    operationType = input('Qual a sua operação matemática básica? ').lower()
+
+    if operationType not in ['adição', 'subtração', 'multiplicação', 'divisão']:
+        print('Não conheço essa operação.')
+    
+    else:
+        averageA = float(input('Qual o valor da média A? '))
+        averageB = float(input('Qual o valor da média B? '))
+        errorA = float(input('Qual o valor do erro absoluto A? '))
+        errorB = float(input('Qual o valor do erro absoluto B? '))
+
+    if operationType == 'adição':
+        result1 = (averageA + averageB)
+        result2 = (errorA + errorB)
+        
+    elif operationType == 'subtração':
+        result1 = (averageA - averageB)
+        result2 = (errorA + errorB)
+        
+    elif operationType == 'multiplicação':
+        result1 = (averageA * averageB)
+        result2 = (averageA * averageB) * (errorA / averageA + errorB / averageB)
+        
+    elif operationType == 'divisão':
+        result1 = (averageA / averageB)
+        result2 = (averageA / averageB) * (errorA / averageA + errorB / averageB)
+    
+    print(f'O valor é {result1:.4f} +- {result2:.4f}')
